@@ -25,12 +25,13 @@ public class UserService {
 
         Role role = Role.valueOf(roleStr.toUpperCase()); // PATIENT/DOCTOR/ADMIN
 
-        User user = new User(
-                fullName,
-                email,
-                passwordEncoder.encode(password),
-                role
-        );
+        User user = User.builder()
+                .fullName(fullName)
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .role(role)
+                .enabled(true) 
+                .build();
 
         return userRepository.save(user);
     }
